@@ -1,0 +1,14 @@
+package kieker.tools.loggingserver;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        Thread monitoringServerThread = new Thread(new MonitoringServer());
+        monitoringServerThread.start();
+
+        SpringApplication.run(Application.class, args);
+    }
+}
