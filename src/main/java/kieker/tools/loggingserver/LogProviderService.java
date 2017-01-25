@@ -14,7 +14,7 @@ import java.io.*;
 @RestController
 public class LogProviderService {
 
-    private static final Log LOG = LogFactory.getLog(MonitoringServer.class);
+    private static final Log LOG = LogFactory.getLog(LogProviderService.class);
 
     @RequestMapping(value = "/logs")
     public void getLogs(HttpServletResponse response, @RequestParam(value="count", defaultValue="4") int count) {
@@ -39,7 +39,7 @@ public class LogProviderService {
     private File createZip(int count)  {
         File zipFile = null;
         try {
-            Process p = Runtime.getRuntime().exec("/usr/bin/bash /opt/ziptool.sh " + count);
+            Process p = Runtime.getRuntime().exec("/bin/bash /opt/ziptool.sh " + count);
             p.waitFor();
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
