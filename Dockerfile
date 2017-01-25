@@ -4,6 +4,7 @@ WORKDIR /opt
 
 EXPOSE 22 8080
 
+RUN mvn clean compile package
 ADD target/kieker-logging-server-0.0.1.jar /opt/kls.jar
 
 RUN apt-get update && apt-get -y upgrade && apt-get install -y openssh-server
