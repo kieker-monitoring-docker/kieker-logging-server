@@ -26,7 +26,7 @@ The amount of logging data can be specified with the optional parameter `count`.
 
 `GET: http://<hostname>:8080/logs[?count=<n>]`
 * `<hostname>` has to be replaced with the actual hostname where the server is started.
-* `<n>` specifies the amount of recent log files to be included. If the parameter is not given it defaults to 4.
+* `<n>` specifies the amount of recent log files to be included. If the parameter is not given it **defaults to 4**.
 
 * It returns a ZIP-file named `kiekerlogs.zip` containing the log files in the `*.dat` file format and the `kieker.map` file.
 
