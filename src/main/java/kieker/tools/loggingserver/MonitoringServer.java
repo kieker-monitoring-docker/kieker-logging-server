@@ -35,13 +35,11 @@ public class MonitoringServer implements Runnable {
         System.out.println(jmsReaderConfig.getStringProperty(JMSReader.CONFIG_PROPERTY_NAME_PROVIDERURL));
 
         final JMSReader jmsReader = new JMSReader(jmsReaderConfig, analysisController);
-        final TeeFilter teeFilter = new TeeFilter(new Configuration(), analysisController);
 
         final MonitoringRecordLoggerFilter mrlf = new MonitoringRecordLoggerFilter(new Configuration(), analysisController);
 
         try {
-            analysisController.connect(jmsReader, JMSReader.OUTPUT_PORT_NAME_RECORDS, teeFilter, TeeFilter.INPUT_PORT_NAME_EVENTS);
-            analysisController.connect(teeFilter, TeeFilter.OUTPUT_PORT_NAME_RELAYED_EVENTS, mrlf, MonitoringRecordLoggerFilter.INPUT_PORT_NAME_RECORD);
+            analysisController.connect(jmsReader, JMSReader.OUTPUT_PORT_NAME_RECORDS, mrlf, MonitoringRecordLoggerFilter.INPUT_PORT_NAME_RECORD);
             analysisController.run();
         } catch (final IllegalStateException e) {
             LOG.warn("An exception occurred", e);
