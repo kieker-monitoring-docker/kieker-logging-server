@@ -3,7 +3,7 @@ Springboot-based service receiving Kieker monitoring data via JMS and
 * providing the logs via REST
 * writing the logs to InfluxDB
 
-Note: The current implementation of InfluxDB writer only works with `OperationExeuctionRecord` collected from RSS Reader application.
+Note: The current implementation of InfluxDB writer can only write `OperationExeuctionRecord` to the database.
 
 ### What it does
 
