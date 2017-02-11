@@ -72,6 +72,7 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
         System.out.println("dbUsername = " + dbUsername);
         System.out.println("dbPassword = " + dbPassword);
         System.out.println("dbName = " + dbName);
+		// TODO: Properly handle exceptions and try to reconnect if it fails
         this.influxDB = InfluxDBFactory.connect(this.dbURL + ":" + this.dbPort, this.dbUsername, this.dbPassword);
         System.out.println("Connecting to database done");
         this.initialize();
@@ -88,6 +89,7 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
         for (String db : dbList) {
             System.out.println("Existing database: " + db);
         }
+//		TODO: Create database if it does not exist
 //        if (!dbList.contains(this.dbName)) {
 //            System.out.println("Creating database");
 //            this.influxDB.createDatabase(this.dbName);
@@ -97,7 +99,7 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
     }
 
     @InputPort(name = INPUT_PORT_NAME_RECORD,
-            description = "Receives incoming records to be written to InfluxDB",
+            description = "Receives incoming records and writes to InfluxDB",
             eventTypes = { IMonitoringRecord.class }
     )
     public final void inputRecord(final IMonitoringRecord monitoringRecord) {
