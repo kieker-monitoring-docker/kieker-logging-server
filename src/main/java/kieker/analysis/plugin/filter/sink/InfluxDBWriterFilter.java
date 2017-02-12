@@ -116,7 +116,6 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
             final long tout = operationExecutionRecord.getTout();
             final long traceId = operationExecutionRecord.getTraceId();
             final long responseTime = tout - tin;
-            final double responseTimeInMillisecond = TimeUnit.MILLISECONDS.convert(responseTime, TimeUnit.NANOSECONDS);
 
             final String container_name = hostname.replaceAll("-[^-]+$", "");
 
@@ -131,7 +130,6 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
                     .addField("eoi", eoi)
                     .addField("ess", ess)
                     .addField("response_time", responseTime)
-                    .addField("response_time_in_millisecond", responseTimeInMillisecond)
                     .tag("operation_signature", operationSignature)
                     .tag("hostname", hostname)
                     .tag("container_name", container_name)
