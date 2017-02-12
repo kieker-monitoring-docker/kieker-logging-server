@@ -134,7 +134,7 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
                     .tag("hostname", hostname)
                     .tag("container_name", container_name)
                     .build();
-            influxDB.write(dbName, "default", point);
+            influxDB.write(dbName, "autogen", point);
         }
     }
 
