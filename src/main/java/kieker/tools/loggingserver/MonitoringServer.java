@@ -52,10 +52,7 @@ public class MonitoringServer implements Runnable {
         influxDBConfig.setProperty(InfluxDBWriterFilter.CONFIG_PROPERTY_DB_NAME, this.influxDBDatabaseName);
         final InfluxDBWriterFilter influxDBWriterFilter = new InfluxDBWriterFilter(influxDBConfig, analysisController);
 
-        final MonitoringRecordLoggerFilter mrlf = new MonitoringRecordLoggerFilter(new Configuration(), analysisController);
-
         try {
-            analysisController.connect(jmsReader, JMSReader.OUTPUT_PORT_NAME_RECORDS, mrlf, MonitoringRecordLoggerFilter.INPUT_PORT_NAME_RECORD);
             analysisController.connect(jmsReader, JMSReader.OUTPUT_PORT_NAME_RECORDS, influxDBWriterFilter, InfluxDBWriterFilter.INPUT_PORT_NAME_RECORD);
             analysisController.run();
         } catch (final IllegalStateException e) {
