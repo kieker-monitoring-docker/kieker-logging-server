@@ -19,9 +19,11 @@ In the following the usage of the KLS is explained.
 #### Receiving Kieker Monitoring Data
 The KLS uses environment variables for the definition of the JMS server it connects to.
 Before starting KLS, the following environment variables have to be set:
-* `KLS_JMS_HOST`: Host name of the JMS server
-* `KLS_JMS_PORT`: Port of the JMS server
-* `KLS_JMS_QUEUE`: Queue name of the JMS server
+* `KLS_JMS_HOST`: Host name of the JMS server (e.g. `activemq` without 'tcp://')
+* `KLS_JMS_PORT`: Port of the JMS server (default: 61616)
+* `KLS_JMS_QUEUE`: Queue name of the JMS server ('kieker' for kieker queue)
+* `KLS_LOGGER_ENABLED`: Enable writing log to filesystem (true or false)
+* `KLS_INFLUXDB_ENABLED`: Enable writing log to influxdb (true or false)
 * `KLS_INFLUXDB_URL`: Hostname of InfluxDB (e.g. `http://monitoring-influxdb.kube-system`)
 * `KLS_INFLUXDB_PORT`: InfluxDB port (default: `8086`)
 * `KLS_INFLUXDB_USERNAME`: InfluxDB username (default: `root`)
