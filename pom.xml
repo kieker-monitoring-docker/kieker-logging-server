@@ -54,6 +54,12 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <artifactId>kieker</artifactId>
             <version>1.13-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.influxdb</groupId>
+            <artifactId>influxdb-java</artifactId>
+            <version>2.5</version>
+        </dependency>
     </dependencies>
 
     <build>
