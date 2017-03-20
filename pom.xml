@@ -7,7 +7,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>kieker.loggingserver</groupId>
     <artifactId>kieker-logging-server</artifactId>
-    <version>0.0.1</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
 
     <name>kieker-monitoring-server</name>
