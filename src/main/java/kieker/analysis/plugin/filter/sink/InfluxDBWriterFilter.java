@@ -68,10 +68,13 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
         this.dbPassword = this.configuration.getStringProperty(CONFIG_PROPERTY_DB_PASSWORD);
         this.dbName = this.configuration.getStringProperty(CONFIG_PROPERTY_DB_NAME);
 
-		try {
-			this.connect();
-		} catch (IOException e) {
-			System.out.println("Cannot connect to influxdb");
+		String influxDBEnabled= System.getenv("KLS_INFLUXDB_ENABLED");
+		if (influxDBEnabled!=null && influxDBEnabled.toLowerCase().equals("true")) {
+			try {
+				this.connect();
+			} catch (IOException e) {
+				System.out.println("Cannot connect to influxdb");
+			}
 		}
 	}
 
@@ -146,21 +149,24 @@ public class InfluxDBWriterFilter extends AbstractFilterPlugin {
 				final long responseTime = tout - tin;
 
 
-				Point point = Point.measurement("operation_execution")
+				Point point = Point.measurement("OperationExecution")
 					.time(timestamp, TimeUnit.NANOSECONDS)
-					.addField("operation_signature", operationSignature)
-					.addField("session_id", sessionId)
-					.addField("trace_id", traceId)
+					.addField("sessionId", sessionId)
+					.addField("traceId", traceId)
 					.addField("tin", tin)
 					.addField("tout", tout)
-					.addField("hostname", hostname)
 					.addField("eoi", eoi)
 					.addField("ess", ess)
-					.addField("response_time", responseTime)
-					.tag("operation_signature", operationSignature)
+					.addField("responseTime", responseTime)
+					.tag("operationSignature", operationSignature)
 					.tag("hostname", hostname)
 					.build();
-				influxDB.write(dbName, "autogen", point);
+				try {
+					influxDB.write(dbName, "autogen", point);
+				} catch (RuntimeException e) {
+					System.out.println(e);
+					this.isConnected =false;
+				}
 			}
 		}
 
