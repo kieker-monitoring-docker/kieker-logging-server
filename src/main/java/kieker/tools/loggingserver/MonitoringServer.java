@@ -44,9 +44,9 @@ public class MonitoringServer implements Runnable {
 		this.influxDBPassword = System.getenv("KLS_INFLUXDB_PASSWORD");
 		this.influxDBDatabaseName = System.getenv("KLS_INFLUXDB_DATABASE_NAME");
 
-		LOG.info("Waiting 10 seconds for jms server to start");
+		LOG.info("Waiting 60 seconds for jms server to start");
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(60000);
 		} catch (IllegalArgumentException e) {
 			LOG.error("Error sleeping. Continue without waiting", e);
 		} catch (InterruptedException e) {
