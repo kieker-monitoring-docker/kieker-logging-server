@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Plugin(description = "A filter to write Kieker records to InfluxDB",
         configuration = {
-            @Property(name = InfluxDBWriterFilter.CONFIG_PROPERTY_DB_URL, defaultValue = "localhost",
+            @Property(name = InfluxDBWriterFilter.CONFIG_PROPERTY_DB_URL, defaultValue = "http://localhost",
                     description = "InfluxDB URL"),
             @Property(name = InfluxDBWriterFilter.CONFIG_PROPERTY_DB_PORT, defaultValue = "8086",
                     description = "InfluxDB port"),
